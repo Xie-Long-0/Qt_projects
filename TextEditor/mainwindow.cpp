@@ -133,10 +133,6 @@ void MainWindow::createActions()
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(About()));
 
-    //aboutQtAct = new QAction(tr("About &Qt"), this);
-    //aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
-    //connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-
     cutAct->setEnabled(false);
     copyAct->setEnabled(false);
     connect(textEdit, SIGNAL(copyAvailable(bool)),
