@@ -24,6 +24,11 @@ Widget::Widget(QWidget *parent) :
   //关联两个分组的信号和槽
   connect(m_pGenderGroup, SIGNAL(buttonClicked(int)), this, SLOT(recvGenderID(int)));
   connect(m_pStatusGroup, SIGNAL(buttonClicked(int)), this, SLOT(recvStatusID(int)));
+
+  //设置默认选中
+  ui->radBtn_type_LM->setChecked(true);
+  ui->radBtn_status_1->setChecked(true);
+  ui->radBtn_gpBox_1->setChecked(true);
 }
 
 Widget::~Widget()
