@@ -74,9 +74,7 @@ bool MainWindow::SaveAs()
 void MainWindow::About()
 {
    QMessageBox::about(this, tr("About TextEditor beta"),
-            tr("这个 <b>TextEditor</b> 结合了我以前学SDL2的时候的套路，"
-               "再结合网上的教程，所以连ui文件都没有，这个基本是Sample..."
-               "听说QPlainTextEdit比较强大就不用QTextEdit了。"));
+            tr("���ϵ�����"));
 }
 
 void MainWindow::DocumentWasModified()
@@ -201,9 +199,9 @@ bool MainWindow::maybeSave()
     if (textEdit->document()->isModified())
     {
         QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("注意"),
-                     tr("文件已更改\n"
-                        "是否保存更改？"),
+        ret = QMessageBox::warning(this, tr("ע��"),
+                     tr("�ļ��Ѹ���\n"
+                        "�Ƿ񱣴���ģ�"),
                      QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         if (ret == QMessageBox::Save)
             return Save();
@@ -217,7 +215,7 @@ void MainWindow::loadFile(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("错误"),
+        QMessageBox::warning(this, tr("����"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
@@ -242,7 +240,7 @@ bool MainWindow::saveFile(const QString &fileName)
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
-        QMessageBox::warning(this, tr("错误"),
+        QMessageBox::warning(this, tr("����"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
@@ -271,7 +269,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 
     QString shownName = curFile;
     if (curFile.isEmpty())
-        shownName = "未命名.txt";
+        shownName = "δ����.txt";
     setWindowFilePath(shownName);
 }
 
