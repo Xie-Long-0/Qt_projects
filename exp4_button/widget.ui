@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>564</width>
-    <height>467</height>
+    <width>659</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>50</y>
-     <width>61</width>
-     <height>21</height>
+     <y>30</y>
+     <width>71</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -31,16 +31,16 @@
     <string>角色：</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="labelGender">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>90</y>
-     <width>61</width>
-     <height>21</height>
+     <y>70</y>
+     <width>71</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -52,16 +52,16 @@
     <string>性别：</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QRadioButton" name="radioBtnMaster">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>50</y>
+     <x>150</x>
+     <y>30</y>
      <width>91</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -76,10 +76,10 @@
   <widget class="QRadioButton" name="radioBtnDoctor">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>50</y>
+     <x>270</x>
+     <y>30</y>
      <width>91</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -94,10 +94,10 @@
   <widget class="QRadioButton" name="radioBtnBothMnD">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>50</y>
+     <x>390</x>
+     <y>30</y>
      <width>91</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -106,16 +106,16 @@
     </font>
    </property>
    <property name="text">
-    <string>两个都是</string>
+    <string>其他</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="radioBtnMale">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>90</y>
+     <x>150</x>
+     <y>70</y>
      <width>91</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -130,10 +130,10 @@
   <widget class="QRadioButton" name="radioBtnFemale">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>90</y>
+     <x>270</x>
+     <y>70</y>
      <width>91</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -148,10 +148,10 @@
   <widget class="QRadioButton" name="radioBtnNonSex">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>90</y>
+     <x>390</x>
+     <y>70</y>
      <width>91</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -167,8 +167,8 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>130</y>
-     <width>451</width>
+     <y>110</y>
+     <width>561</width>
      <height>81</height>
     </rect>
    </property>
@@ -178,7 +178,7 @@
     </font>
    </property>
    <property name="title">
-    <string>    类别：</string>
+    <string>类别：</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -188,8 +188,8 @@
      <rect>
       <x>20</x>
       <y>40</y>
-      <width>91</width>
-      <height>21</height>
+      <width>101</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
@@ -199,10 +199,10 @@
    <widget class="QRadioButton" name="radioButton_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>150</x>
       <y>40</y>
-      <width>91</width>
-      <height>21</height>
+      <width>101</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
@@ -212,10 +212,10 @@
    <widget class="QRadioButton" name="radioButton_3">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>290</x>
       <y>40</y>
-      <width>91</width>
-      <height>21</height>
+      <width>101</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
@@ -225,10 +225,10 @@
    <widget class="QRadioButton" name="radioButton_4">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>430</x>
       <y>40</y>
-      <width>91</width>
-      <height>21</height>
+      <width>101</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
@@ -239,8 +239,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>230</y>
+     <x>520</x>
+     <y>430</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -252,6 +252,268 @@
    </property>
    <property name="text">
     <string>弹窗显示</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>210</y>
+     <width>561</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="title">
+    <string>喜欢的东西：</string>
+   </property>
+   <widget class="QCheckBox" name="checkBoxGameFate">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>40</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fate系列</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxGameArknights">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>40</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>明日方舟</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxMusicTouhou">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>80</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>东方project</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxMusicVae">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>80</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>许嵩</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxProgramC">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>160</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>C语言/C++</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxProgramJava">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>160</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Java</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxGame">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>游戏：</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxMusic">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>音乐：</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxComic">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>动漫：</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxProgram">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>编程语言：</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxProgramPython">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>160</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Python</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxMusicJayChou">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>80</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>周杰伦</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxComicFate">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>120</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Fate系列</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxComicKaguya">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>120</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>辉夜大小姐</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxComicConan">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>120</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>名侦探柯南</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBoxGameTouhou">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>40</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>东方project</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QCommandLinkButton" name="cmdLinkButtonHome">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>430</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>打开主目录</string>
+   </property>
+  </widget>
+  <widget class="QCommandLinkButton" name="cmdLinkButtonGoogle">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>430</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>打开Google主页</string>
    </property>
   </widget>
  </widget>
