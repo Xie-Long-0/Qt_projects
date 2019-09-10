@@ -142,9 +142,9 @@
   <widget class="QLabel" name="label_Slider">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>50</x>
      <y>530</y>
-     <width>91</width>
+     <width>131</width>
      <height>21</height>
     </rect>
    </property>
