@@ -74,7 +74,7 @@ bool MainWindow::SaveAs()
 void MainWindow::About()
 {
    QMessageBox::about(this, tr("About TextEditor beta"),
-            tr("ÍøÉÏµÄÀı×Ó"));
+            tr("ç½‘ä¸Šçš„ä¾‹å­"));
 }
 
 void MainWindow::DocumentWasModified()
@@ -199,9 +199,9 @@ bool MainWindow::maybeSave()
     if (textEdit->document()->isModified())
     {
         QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("×¢Òâ"),
-                     tr("ÎÄ¼şÒÑ¸ü¸Ä\n"
-                        "ÊÇ·ñ±£´æ¸ü¸Ä£¿"),
+        ret = QMessageBox::warning(this, tr("æ³¨æ„"),
+                     tr("æ–‡ä»¶å·²æ›´æ”¹\n"
+                        "æ˜¯å¦ä¿å­˜æ›´æ”¹ï¼Ÿ"),
                      QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         if (ret == QMessageBox::Save)
             return Save();
@@ -215,7 +215,7 @@ void MainWindow::loadFile(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("´íÎó"),
+        QMessageBox::warning(this, tr("é”™è¯¯"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
@@ -240,7 +240,7 @@ bool MainWindow::saveFile(const QString &fileName)
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
-        QMessageBox::warning(this, tr("´íÎó"),
+        QMessageBox::warning(this, tr("é”™è¯¯"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
@@ -269,7 +269,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
 
     QString shownName = curFile;
     if (curFile.isEmpty())
-        shownName = "Î´ÃüÃû.txt";
+        shownName = "æœªå‘½å.txt";
     setWindowFilePath(shownName);
 }
 
