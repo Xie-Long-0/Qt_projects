@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>exp8_ImageShow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/resource/icon.png</normaloff>:/resource/icon.png</iconset>
+  </property>
   <widget class="QLabel" name="label_Viewer">
    <property name="geometry">
     <rect>
@@ -154,6 +158,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -89,7 +89,7 @@ void Widget::scalePixMap(int scale)
 
 void Widget::on_pushButton_OpenImage_clicked()
 {
-    QString strFile = QFileDialog::getOpenFileName(this, tr("打开图片"), "/home/xielong/图片",
+    QString strFile = QFileDialog::getOpenFileName(this, tr("打开图片"), "",
                       "Pictures (*.bmp *.ico *.jpg *.jpeg *.png *.svg *.tif *.tiff *.webp *.xpm)");
     if (strFile.isEmpty())
         return;
@@ -126,7 +126,7 @@ void Widget::on_pushButton_OpenImage_clicked()
 
 void Widget::on_pushButton_OpenMovie_clicked()
 {
-    QString strFile = QFileDialog::getOpenFileName(this, tr("打开动态图"), "/home/xielong/图片",
+    QString strFile = QFileDialog::getOpenFileName(this, tr("打开动态图"), "",
                       "Animations (*.gif *.mng *.webp)");
     if (strFile.isEmpty())
         return;
