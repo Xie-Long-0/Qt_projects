@@ -12,8 +12,8 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_pPixMap = NULL;
-    m_pMovie = NULL;
+    m_pPixMap = nullptr;
+    m_pMovie = nullptr;
     m_isMovie = false;
     m_isPlaying = false;
 
@@ -54,16 +54,16 @@ void Widget::recvFrameNumber(int frameNumber)
 
 void Widget::clearOld()
 {
-    if (m_pPixMap != NULL) {
+    if (m_pPixMap != nullptr) {
         delete m_pPixMap;
-        m_pPixMap = NULL;
+        m_pPixMap = nullptr;
     }
 
-    if (m_pMovie != NULL) {
+    if (m_pMovie != nullptr) {
         if (m_isPlaying)
             m_pMovie->stop();
         delete m_pMovie;
-        m_pMovie = NULL;
+        m_pMovie = nullptr;
     }
 
     ui->label_Viewer->clear();
@@ -119,7 +119,7 @@ void Widget::on_pushButton_OpenImage_clicked()
     }
     else {
         delete m_pPixMap;
-        m_pPixMap = NULL;
+        m_pPixMap = nullptr;
         QMessageBox::critical(this, tr("打开失败"), tr("无法打开图片：%1").arg(strFile));
     }
 }
@@ -137,7 +137,7 @@ void Widget::on_pushButton_OpenMovie_clicked()
     m_pMovie = new QMovie(strFile);
     if (!m_pMovie->isValid()) {
         delete m_pMovie;
-        m_pMovie = NULL;
+        m_pMovie = nullptr;
         QMessageBox::critical(this, tr("打开失败"), tr("无法打开动态图：%1").arg(strFile));
         return;
     }
