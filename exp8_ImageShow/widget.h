@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QMovie>
-#include <QImageReader>
 
 namespace Ui {
 class Widget;
