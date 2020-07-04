@@ -1,7 +1,10 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-#include <QDebug>
+#ifdef QT_DEBUG
+  #include <QDebug>
+#endif
+
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QScrollArea>
@@ -18,19 +21,25 @@ Widget::Widget(QWidget *parent) :
     m_isPlaying = false;
 
     //设置滚动区域
-    QRect rectlabel = ui->label_Viewer->geometry();
     QScrollArea *m_scrollArea = new QScrollArea(this);
     m_scrollArea->setWidget(ui->label_Viewer);
-    m_scrollArea->setGeometry(rectlabel);
+
+    QRect labelRect = ui->label_Viewer->geometry();
+    //调整滚动条区域大小，防止一开始就出现
+    labelRect.setWidth(labelRect.width() + 4);
+    labelRect.setHeight(labelRect.height() + 4);
+    m_scrollArea->setGeometry(labelRect);
 
     ui->pushButton_Func1->setEnabled(false);
     ui->pushButton_Func2->setEnabled(false);
     ui->pushButton_Func3->setEnabled(false);
     ui->horizontalSlider->setEnabled(false);
 
+#ifdef QT_DEBUG
     //打印支持的格式
     qDebug() << QImageReader::supportedImageFormats();
     qDebug() << QMovie::supportedFormats();
+#endif
 }
 
 Widget::~Widget()
@@ -41,8 +50,12 @@ Widget::~Widget()
 
 void Widget::recvPlayError(QImageReader::ImageReaderError error)
 {
+#ifdef QT_DEBUG
     qDebug() << "动图播放出错代码：" << error;
-    QMessageBox::critical(this, tr("播放出错"), tr("动图播放出错：%1").arg(m_pMovie->fileName()));
+#endif
+
+    QMessageBox::critical(this, tr("播放出错"),
+                          tr("动图播放出错[code: %2]：%1").arg(m_pMovie->fileName()).arg(error));
     m_isPlaying = false;
 }
 
@@ -50,7 +63,6 @@ void Widget::recvFrameNumber(int frameNumber)
 {
     ui->horizontalSlider->setValue(frameNumber);
 }
-
 
 void Widget::clearOld()
 {
@@ -95,7 +107,10 @@ void Widget::on_pushButton_OpenImage_clicked()
         return;
 
     clearOld();     //清除旧内容
+
+#ifdef QT_DEBUG
     qDebug() << strFile;
+#endif
 
     m_pPixMap = new QPixmap();
     if (m_pPixMap->load(strFile)) {
@@ -112,7 +127,7 @@ void Widget::on_pushButton_OpenImage_clicked()
         ui->pushButton_Func3->setText(tr("还原"));
 
         ui->horizontalSlider->setEnabled(true);
-        ui->horizontalSlider->setRange(25, 200);
+        ui->horizontalSlider->setRange(25, 300);
         ui->horizontalSlider->setSingleStep(10);
         ui->horizontalSlider->setValue(100);
         ui->label_Slider->setText(tr("缩放倍数：100%"));
@@ -132,7 +147,10 @@ void Widget::on_pushButton_OpenMovie_clicked()
         return;
 
     clearOld();     //清除旧内容
+
+#ifdef QT_DEBUG
     qDebug() << strFile;
+#endif
 
     m_pMovie = new QMovie(strFile);
     if (!m_pMovie->isValid()) {
@@ -143,8 +161,11 @@ void Widget::on_pushButton_OpenMovie_clicked()
     }
 
     int nFrameCount = m_pMovie->frameCount();
+
+#ifdef QT_DEBUG
     qDebug() << "总帧数：" << nFrameCount;
     qDebug() << "循环次数：" << m_pMovie->loopCount();
+#endif
 
     ui->label_Viewer->setMovie(m_pMovie);
     m_isMovie = true;
