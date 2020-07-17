@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     QSplashScreen splash(pixSplash);
     //显示闪屏和提示信息
     splash.show();
-    splash.showMessage(QObject::tr("1+1=⑨"), Qt::AlignBottom|Qt::AlignHCenter);
+    splash.showMessage(QObject::tr("1+1=⑨"), Qt::AlignBottom | Qt::AlignHCenter);
 
     //启动应用程序的事件处理
     a.processEvents();

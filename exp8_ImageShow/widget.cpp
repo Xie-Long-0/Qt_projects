@@ -2,7 +2,7 @@
 #include "ui_widget.h"
 
 #ifdef QT_DEBUG
-  #include <QDebug>
+#include <QDebug>
 #endif
 
 #include <QFileDialog>
@@ -55,7 +55,7 @@ void Widget::recvPlayError(QImageReader::ImageReaderError error)
 #endif
 
     QMessageBox::critical(this, tr("播放出错"),
-                          tr("动图播放出错[code: %2]：%1").arg(m_pMovie->fileName()).arg(error));
+        tr("动图播放出错[code: %2]：%1").arg(m_pMovie->fileName()).arg(error));
     m_isPlaying = false;
 }
 
@@ -102,7 +102,7 @@ void Widget::scalePixMap(int scale)
 void Widget::on_pushButton_OpenImage_clicked()
 {
     QString strFile = QFileDialog::getOpenFileName(this, tr("打开图片"), "",
-                      "Pictures (*.bmp *.ico *.jpg *.jpeg *.png *.svg *.tif *.tiff *.webp *.xpm)");
+        "Pictures (*.bmp *.ico *.jpg *.jpeg *.png *.svg *.tif *.tiff *.webp *.xpm)");
     if (strFile.isEmpty())
         return;
 
@@ -142,7 +142,7 @@ void Widget::on_pushButton_OpenImage_clicked()
 void Widget::on_pushButton_OpenMovie_clicked()
 {
     QString strFile = QFileDialog::getOpenFileName(this, tr("打开动态图"), "",
-                      "Animations (*.gif *.mng *.webp)");
+        "Animations (*.gif *.mng *.webp)");
     if (strFile.isEmpty())
         return;
 
