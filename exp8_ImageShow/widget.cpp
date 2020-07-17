@@ -20,6 +20,7 @@ Widget::Widget(QWidget *parent) :
     m_isMovie = false;
     m_isPlaying = false;
 
+    /*
     //设置滚动区域
     QScrollArea *m_scrollArea = new QScrollArea(this);
     m_scrollArea->setWidget(ui->label_Viewer);
@@ -29,6 +30,7 @@ Widget::Widget(QWidget *parent) :
     labelRect.setWidth(labelRect.width() + 4);
     labelRect.setHeight(labelRect.height() + 4);
     m_scrollArea->setGeometry(labelRect);
+    */
 
     ui->pushButton_Func1->setEnabled(false);
     ui->pushButton_Func2->setEnabled(false);
