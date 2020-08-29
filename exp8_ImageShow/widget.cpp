@@ -7,30 +7,17 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QScrollArea>
+
+#if _MSC_VER > 1600
+#pragma execution_character_set("utf-8")
+#endif
+
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-
-    m_pPixMap = nullptr;
-    m_pMovie = nullptr;
-    m_isMovie = false;
-    m_isPlaying = false;
-
-    /*
-    //设置滚动区域
-    QScrollArea *m_scrollArea = new QScrollArea(this);
-    m_scrollArea->setWidget(ui->label_Viewer);
-
-    QRect labelRect = ui->label_Viewer->geometry();
-    //调整滚动条区域大小，防止一开始就出现
-    labelRect.setWidth(labelRect.width() + 4);
-    labelRect.setHeight(labelRect.height() + 4);
-    m_scrollArea->setGeometry(labelRect);
-    */
 
     ui->pushButton_Func1->setEnabled(false);
     ui->pushButton_Func2->setEnabled(false);
@@ -53,27 +40,33 @@ Widget::~Widget()
 void Widget::recvPlayError(QImageReader::ImageReaderError error)
 {
 #ifdef QT_DEBUG
-    qDebug() << "动图播放出错代码：" << error;
+    qDebug() << "[动图播放出错] error code: " << error << "frame: " << m_pMovie->currentFrameNumber();
 #endif
 
     QMessageBox::critical(this, tr("播放出错"),
-        tr("动图播放出错[code: %2]：%1").arg(m_pMovie->fileName()).arg(error));
+        tr("动图播放出错：%1").arg(m_pMovie->fileName()));
+    m_pMovie->stop();
     m_isPlaying = false;
 }
 
 void Widget::recvFrameNumber(int frameNumber)
 {
-    ui->horizontalSlider->setValue(frameNumber);
+    if (m_isMovie)
+    {
+        ui->horizontalSlider->setValue(frameNumber);
+    }
 }
 
 void Widget::clearOld()
 {
-    if (m_pPixMap != nullptr) {
+    if (m_pPixMap != nullptr)
+    {
         delete m_pPixMap;
         m_pPixMap = nullptr;
     }
 
-    if (m_pMovie != nullptr) {
+    if (m_pMovie != nullptr)
+    {
         if (m_isPlaying)
             m_pMovie->stop();
         delete m_pMovie;
@@ -95,10 +88,9 @@ void Widget::scalePixMap(int scale)
 {
     int sw = m_pPixMap->width() * scale / 100;
     int sh = m_pPixMap->height() * scale / 100;
-    QPixmap newpix = m_pPixMap->scaled(sw, sh);
+    QPixmap newpix = m_pPixMap->scaled(sw, sh, Qt::KeepAspectRatio);
     ui->label_Viewer->setPixmap(newpix);
-    ui->label_Viewer->setGeometry(newpix.rect());
-    ui->horizontalSlider->setValue(scale);
+    ui->label_Viewer->resize(newpix.size());
 }
 
 void Widget::on_pushButton_OpenImage_clicked()
@@ -108,18 +100,17 @@ void Widget::on_pushButton_OpenImage_clicked()
     if (strFile.isEmpty())
         return;
 
-    clearOld();     //清除旧内容
-
 #ifdef QT_DEBUG
     qDebug() << strFile;
 #endif
 
-    m_pPixMap = new QPixmap();
-    if (m_pPixMap->load(strFile)) {
+    QPixmap *tmpPixmap = new QPixmap;
+    if (tmpPixmap->load(strFile))
+    {
+        clearOld();     //清除旧内容
+        m_pPixMap = tmpPixmap;
         ui->label_Viewer->setPixmap(*m_pPixMap);
         ui->label_Viewer->setGeometry(m_pPixMap->rect());
-        m_isMovie = false;
-        m_isPlaying = false;
 
         ui->pushButton_Func1->setEnabled(true);
         ui->pushButton_Func1->setText(tr("缩小"));
@@ -134,9 +125,9 @@ void Widget::on_pushButton_OpenImage_clicked()
         ui->horizontalSlider->setValue(100);
         ui->label_Slider->setText(tr("缩放倍数：100%"));
     }
-    else {
-        delete m_pPixMap;
-        m_pPixMap = nullptr;
+    else
+    {
+        delete tmpPixmap;
         QMessageBox::critical(this, tr("打开失败"), tr("无法打开图片：%1").arg(strFile));
     }
 }
@@ -148,20 +139,20 @@ void Widget::on_pushButton_OpenMovie_clicked()
     if (strFile.isEmpty())
         return;
 
-    clearOld();     //清除旧内容
-
 #ifdef QT_DEBUG
     qDebug() << strFile;
 #endif
 
-    m_pMovie = new QMovie(strFile);
-    if (!m_pMovie->isValid()) {
-        delete m_pMovie;
-        m_pMovie = nullptr;
+    QMovie *tmpMovie = new QMovie(strFile);
+    if (!tmpMovie->isValid())
+    {
+        delete tmpMovie;
         QMessageBox::critical(this, tr("打开失败"), tr("无法打开动态图：%1").arg(strFile));
         return;
     }
 
+    clearOld();     //清除旧内容
+    m_pMovie = tmpMovie;
     int nFrameCount = m_pMovie->frameCount();
 
 #ifdef QT_DEBUG
@@ -172,7 +163,8 @@ void Widget::on_pushButton_OpenMovie_clicked()
     ui->label_Viewer->setMovie(m_pMovie);
     m_isMovie = true;
 
-    if (nFrameCount > 0) {
+    if (nFrameCount > 0)
+    {
         ui->horizontalSlider->setRange(0, nFrameCount);
         ui->horizontalSlider->setSingleStep(1);
         ui->horizontalSlider->setValue(0);
@@ -182,7 +174,9 @@ void Widget::on_pushButton_OpenMovie_clicked()
     connect(m_pMovie, &QMovie::error, this, &Widget::recvPlayError);
     connect(m_pMovie, &QMovie::frameChanged, this, &Widget::recvFrameNumber);
 
-    if (m_pMovie->jumpToFrame(0)) {     //设置label的大小为第一帧的大小
+    if (m_pMovie->jumpToFrame(0))
+    {
+        //设置label的大小为第一帧的大小
         ui->label_Viewer->setGeometry(m_pMovie->frameRect());
     }
 
@@ -194,56 +188,66 @@ void Widget::on_pushButton_OpenMovie_clicked()
 
 void Widget::on_pushButton_Func1_clicked()
 {
-    if (m_isMovie) {    //播放暂停功能
-        if (m_isPlaying) {
+    if (m_isMovie)
+    {
+        //播放暂停功能
+        if (m_isPlaying)
+        {
             m_pMovie->setPaused(true);
             m_isPlaying = false;
             ui->pushButton_Func1->setText(tr("播放"));
         }
-        else {
+        else
+        {
             m_pMovie->start();
             m_isPlaying = true;
             ui->pushButton_Func1->setText(tr("暂停"));
         }
     }
-    else {      //缩小功能
-        int scale = ui->horizontalSlider->value() - 25;
+    else
+    {
+        //缩小功能
+        int scale = ui->horizontalSlider->value() * 0.75;
         if (scale < 25)
             scale = 25;
-        scalePixMap(scale);
+        ui->horizontalSlider->setValue(scale);
     }
 }
 
 void Widget::on_pushButton_Func2_clicked()
 {
-    if (m_isMovie) {    //停止播放功能
+    if (m_isMovie)
+    {
+        //停止播放功能
         m_pMovie->stop();
         m_isPlaying = false;
         m_pMovie->jumpToFrame(0);
         ui->pushButton_Func1->setText(tr("播放"));
     }
-    else {      //放大功能
-        int scale = ui->horizontalSlider->value() + 25;
-        if (scale > 200)
-            scale = 200;
-        scalePixMap(scale);
+    else
+    {
+        //放大功能
+        int scale = ui->horizontalSlider->value() * 1.25;
+        if (scale > 300)
+            scale = 300;
+        ui->horizontalSlider->setValue(scale);
     }
 }
 
 void Widget::on_pushButton_Func3_clicked()
 {
     //还原功能
-    ui->label_Viewer->setPixmap(*m_pPixMap);
-    ui->label_Viewer->setGeometry(m_pPixMap->rect());
     ui->horizontalSlider->setValue(100);
 }
 
 void Widget::on_horizontalSlider_valueChanged(int value)
 {
-    if (m_isMovie) {
+    if (m_isMovie)
+    {
         ui->label_Slider->setText(tr("播放帧数：%1/%2").arg(value).arg(m_pMovie->frameCount()));
     }
-    else {
+    else
+    {
         scalePixMap(value);
         ui->label_Slider->setText(tr("缩放倍数：%1%").arg(value));
     }

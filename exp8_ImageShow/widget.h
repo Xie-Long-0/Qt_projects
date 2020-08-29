@@ -31,10 +31,10 @@ private slots:
 private:
     Ui::Widget *ui;
 
-    QPixmap *m_pPixMap;
-    QMovie *m_pMovie;
-    bool m_isMovie;
-    bool m_isPlaying;
+    QPixmap *m_pPixMap = Q_NULLPTR;
+    QMovie *m_pMovie = Q_NULLPTR;
+    bool m_isMovie = false;
+    bool m_isPlaying = false;
 
     void clearOld();
     void scalePixMap(int scale);
