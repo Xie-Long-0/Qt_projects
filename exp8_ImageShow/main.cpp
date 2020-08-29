@@ -6,6 +6,11 @@
 #include <QSplashScreen>
 #include <QThread>
 
+#if _MSC_VER > 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -17,7 +22,7 @@ int main(int argc, char *argv[])
     w.setWindowIcon(icon);
 
     QPixmap pixSplash(":splash");
-    pixSplash = pixSplash.scaled(300, 300);
+    pixSplash = pixSplash.scaled(300, 300, Qt::KeepAspectRatio);
 
     //创建闪屏
     QSplashScreen splash(pixSplash);

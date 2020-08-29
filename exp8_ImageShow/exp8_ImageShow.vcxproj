@@ -63,7 +63,6 @@
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>qt5.15</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
-    <QtHeaderSearchPath>$(ProjectDir)\$(IntDir)\;$(QtHeaderSearchPath)</QtHeaderSearchPath>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>qt5.15</QtInstall>
@@ -138,12 +137,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DEPRECATED_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
@@ -160,9 +157,7 @@
     <QtMoc />
     <QtRcc />
     <QtUic />
-    <QtUic>
-      <DisplayDependencies>true</DisplayDependencies>
-    </QtUic>
+    <QtUic />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
