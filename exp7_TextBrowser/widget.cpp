@@ -14,9 +14,6 @@ Widget::Widget(QWidget *parent) :
     //启用自带浏览器打开外部链接
     ui->textBrowser->setOpenLinks(true);
 
-    //设置只读
-    ui->plainTextEdit->setReadOnly(true);
-
     ui->pushButton_Backward->setEnabled(false);
     ui->pushButton_Forward->setEnabled(false);
 
