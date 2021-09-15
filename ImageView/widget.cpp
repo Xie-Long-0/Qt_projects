@@ -1,7 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QFileDialog>
-#include <QMessageBox>
 #include <QBoxLayout>
 
 #include "graphicview.h"
@@ -22,6 +21,8 @@ Widget::Widget(QWidget *parent)
     ui->zoomInBtn->setEnabled(false);
     ui->zoomOutBtn->setEnabled(false);
     ui->originalBtn->setEnabled(false);
+    ui->centerImgBtn->setEnabled(false);
+    ui->adjustImgBtn->setEnabled(false);
 }
 
 Widget::~Widget()
@@ -42,6 +43,8 @@ void Widget::on_openImgBtn_clicked()
     ui->zoomInBtn->setEnabled(true);
     ui->zoomOutBtn->setEnabled(true);
     ui->originalBtn->setEnabled(true);
+    ui->centerImgBtn->setEnabled(true);
+    ui->adjustImgBtn->setEnabled(true);
 }
 
 void Widget::on_zoomInBtn_clicked()
@@ -56,10 +59,20 @@ void Widget::on_zoomOutBtn_clicked()
 
 void Widget::on_originalBtn_clicked()
 {
-    gv->resetZoom();
+    gv->zoom100();
+}
+
+void Widget::on_centerImgBtn_clicked()
+{
+    gv->centerImage();
+}
+
+void Widget::on_adjustImgBtn_clicked()
+{
+    gv->zoomAuto();
 }
 
 void Widget::onScaleChanged(double factor)
 {
-    ui->scaledLabel->setText(QString::number(factor * 100) + '%');
+    ui->scaledLabel->setText(QString::number((int)(factor * 100)) + '%');
 }

@@ -60,6 +60,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="centerImgBtn">
+       <property name="text">
+        <string>居中</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="zoomInBtn">
        <property name="text">
         <string>缩小</string>
@@ -70,6 +77,13 @@
       <widget class="QPushButton" name="zoomOutBtn">
        <property name="text">
         <string>放大</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="adjustImgBtn">
+       <property name="text">
+        <string>适应窗口</string>
        </property>
       </widget>
      </item>
@@ -95,7 +109,10 @@
         </size>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Panel</enum>
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
        </property>
        <property name="text">
         <string>100%</string>

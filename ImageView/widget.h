@@ -21,6 +21,8 @@ private slots:
     void on_zoomInBtn_clicked();
     void on_zoomOutBtn_clicked();
     void on_originalBtn_clicked();
+    void on_centerImgBtn_clicked();
+    void on_adjustImgBtn_clicked();
 
     void onScaleChanged(double factor);
 
