@@ -68,7 +68,7 @@ void Widget::on_bLed_on_clicked()
 {
     if (m_tcpSocket && m_tcpSocket->isWritable())
     {
-        m_tcpSocket->write("BLED_ON");
+        m_tcpSocket->write("BLED_ON\r\n");
         qDebug() << "BLED_ON";
     }
 }
@@ -77,7 +77,7 @@ void Widget::on_bLed_off_clicked()
 {
     if (m_tcpSocket && m_tcpSocket->isWritable())
     {
-        m_tcpSocket->write("BLED_OFF");
+        m_tcpSocket->write("BLED_OFF\r\n");
         qDebug() << "BLED_OFF";
     }
 }
@@ -86,7 +86,7 @@ void Widget::on_gLed_on_clicked()
 {
     if (m_tcpSocket && m_tcpSocket->isWritable())
     {
-        m_tcpSocket->write("GLED_ON");
+        m_tcpSocket->write("GLED_ON\r\n");
         qDebug() << "GLED_ON";
     }
 }
@@ -95,7 +95,7 @@ void Widget::on_gLed_off_clicked()
 {
     if (m_tcpSocket && m_tcpSocket->isWritable())
     {
-        m_tcpSocket->write("GLED_OFF");
+        m_tcpSocket->write("GLED_OFF\r\n");
         qDebug() << "GLED_OFF";
     }
 }
@@ -104,7 +104,7 @@ void Widget::on_rLed_on_clicked()
 {
     if (m_tcpSocket && m_tcpSocket->isWritable())
     {
-        m_tcpSocket->write("RLED_ON");
+        m_tcpSocket->write("RLED_ON\r\n");
         qDebug() << "RLED_ON";
     }
 }
@@ -113,7 +113,7 @@ void Widget::on_rLed_off_clicked()
 {
     if (m_tcpSocket && m_tcpSocket->isWritable())
     {
-        m_tcpSocket->write("RLED_OFF");
+        m_tcpSocket->write("RLED_OFF\r\n");
         qDebug() << "RLED_OFF";
     }
 }
