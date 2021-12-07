@@ -55,7 +55,11 @@ void GraphicView::mousePressEvent(QMouseEvent *e)
     if (!m_img.isNull())
     {
         m_pressed = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        m_pos = e->position();
+#else
         m_pos = e->localPos();
+#endif
     }
 }
 
@@ -68,7 +72,11 @@ void GraphicView::mouseMoveEvent(QMouseEvent *e)
 {
     if (m_pressed)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        auto offset = e->position() - m_pos;
+#else
         auto offset = e->localPos() - m_pos;
+#endif
 
         if (m_x <= 0 && m_x + m_w >= width())
             m_x += offset.x();
@@ -77,7 +85,11 @@ void GraphicView::mouseMoveEvent(QMouseEvent *e)
 
         adjustImage();
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        m_pos = e->position();
+#else
         m_pos = e->localPos();
+#endif
         update();
     }
 }
@@ -135,6 +147,9 @@ void GraphicView::zoomInAtPos(const QPointF &pos)
     if (m_factor > 0.25 || m_w > width() || m_h > height())
     {
         m_factor /= 1.25;
+        // 限制最小缩放倍数
+        if (m_factor < 0.25 && m_w < width() && m_h < height()) m_factor = 0.25;
+        
         m_x = pos.x() - (pos.x() - m_x) / 1.25;
         m_y = pos.y() - (pos.y() - m_y) / 1.25;
         m_w = m_img.width() * m_factor;
