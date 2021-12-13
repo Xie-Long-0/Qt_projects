@@ -10,6 +10,8 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    setWindowTitle(tr("图片查看器"));
+
     QHBoxLayout *layout = new QHBoxLayout(ui->frame);
     gv = new GraphicView(ui->frame);
     layout->addWidget(gv);

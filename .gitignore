@@ -290,4 +290,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
-/exp8_ImageShow/.qmake.stash
+*.qmake.stash
