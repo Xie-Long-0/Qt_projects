@@ -2,7 +2,7 @@
 #include <QTcpSocket>
 #include <QUrl>
 
-
+// 控制单片机LED灯
 #define RLED_ON system("echo 255 > /sys/class/leds/red/brightness")
 #define RLED_OFF system("echo 0 > /sys/class/leds/red/brightness")
 #define GLED_ON system("echo 255 > /sys/class/leds/green/brightness")
@@ -10,11 +10,16 @@
 #define BLED_ON system("echo 255 > /sys/class/leds/blue/brightness")
 #define BLED_OFF system("echo 0 > /sys/class/leds/blue/brightness")
 
+#define ON_TEST 1   // 测试模式
 
 TcpServer::TcpServer(bool no_led, QObject *parent) : QObject(parent)
 {
     m_tcpServer = new QTcpServer(this);
+#if ON_TEST
+    m_noLED = true;
+#else
     m_noLED = no_led;
+#endif
     connect(m_tcpServer, &QTcpServer::newConnection, this, &TcpServer::onNewConnection);
 }
 

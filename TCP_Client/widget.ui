@@ -26,7 +26,7 @@
      <item>
       <widget class="QLineEdit" name="addressEdit">
        <property name="text">
-        <string>192.168.1.119</string>
+        <string>127.0.0.1</string>
        </property>
       </widget>
      </item>
