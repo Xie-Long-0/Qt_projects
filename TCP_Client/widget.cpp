@@ -30,6 +30,8 @@ void Widget::on_link_clicked()
         m_tcpSocket = nullptr;
         ui->link->setText(tr("CONNECT"));
         ui->statusLabel->setText(tr("连接已断开"));
+        ui->addressEdit->setEnabled(true);
+        ui->portSpinBox->setEnabled(true);
         return;
     }
 
@@ -37,6 +39,10 @@ void Widget::on_link_clicked()
     if (addr.isNull())
     {
         QMessageBox::warning(this, tr("错误"), tr("服务器地址无效！"));
+        ui->link->setText(tr("CONNECT"));
+        ui->statusLabel->setText(tr("连接已断开"));
+        ui->addressEdit->setEnabled(true);
+        ui->portSpinBox->setEnabled(true);
         return;
     }
 
@@ -59,9 +65,15 @@ void Widget::on_link_clicked()
         ui->statusLabel->setText(tr("已连接"));
         ui->link->setEnabled(true);
     });
+    
     m_tcpSocket->connectToHost(addr, ui->portSpinBox->value());
-    // 连接过程中禁用按钮
-    ui->link->setDisabled(true);
+    // 设置按钮状态
+    ui->link->setText(tr("CONNECTING"));
+    ui->statusLabel->setText(tr("连接中..."));
+    ui->link->setEnabled(false);
+    // 禁用输入框
+    ui->addressEdit->setEnabled(false);
+    ui->portSpinBox->setEnabled(false);
 }
 
 void Widget::on_bLed_on_clicked()
@@ -130,5 +142,7 @@ void Widget::onSocketError(QAbstractSocket::SocketError error)
         ui->link->setText(tr("CONNECT"));
         ui->statusLabel->setText(tr("连接已断开"));
         ui->link->setEnabled(true);
+        ui->addressEdit->setEnabled(true);
+        ui->portSpinBox->setEnabled(true);
     }
 }

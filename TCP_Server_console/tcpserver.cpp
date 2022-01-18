@@ -112,7 +112,7 @@ void TcpServer::onNewConnection()
     host.setHost(tcpSocket->peerAddress().toString());
     host.setPort(tcpSocket->peerPort());
     m_tcpClientList.insert(host.toString(), tcpSocket);
-    qDebug() << "New client:" << host.toString();
+    qDebug() << "New client connected:" << host.toString();
 }
 
 void TcpServer::onDisconnect()
