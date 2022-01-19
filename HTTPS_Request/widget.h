@@ -18,9 +18,10 @@ public:
     ~Widget();
 
 private slots:
-    void on_sendRqstBtn_clicked();
+    void onSendRqstBtnClicked();
+    void onClearBtnClicked();
     void onPostFinished(QNetworkReply *reply);
-    void onSslError(QNetworkReply *reply, const QList<QSslError> errors);
+    void onSslError(QNetworkReply *reply, const QList<QSslError> &errors);
 
 private:
     Ui::Widget *ui;
