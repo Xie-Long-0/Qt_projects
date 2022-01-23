@@ -10,17 +10,26 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
 
     //启用LineEdit编辑
-    on_pB_lineEditEnable_clicked();
+    onLineEditEnableBtnClicked();
     //关联Label
-    on_pB_labelConn_clicked();
+    onLabelConnectBtnClicked();
     //关联TextBrowser
-    on_pB_textbConn_clicked();
+    onTextBrsConnectBtnClicked();
+
+    // 连接按钮点击信号
+    connect(ui->lineEditEnableBtn, &QPushButton::clicked, this, &Widget::onLineEditEnableBtnClicked);
+    connect(ui->lineEditDisableBtn, &QPushButton::clicked, this, &Widget::onLineEditDisableBtnClicked);
+    connect(ui->labelConnectBtn, &QPushButton::clicked, this, &Widget::onLabelConnectBtnClicked);
+    connect(ui->labelDisconnectBtn, &QPushButton::clicked, this, &Widget::onLabelDisconnectBtnClicked);
+    connect(ui->textBrsConnectBtn, &QPushButton::clicked, this, &Widget::onTextBrsConnectBtnClicked);
+    connect(ui->textBrsDisconnectBtn, &QPushButton::clicked, this, &Widget::onTextBrsDisconnectBtnClicked);
 
     connect(ui->lineEdit, &QLineEdit::textEdited, this, &Widget::printText);
 
-    connect(ui->pB_Archer, &QPushButton::clicked, this, &Widget::whoAmI);
-    connect(ui->pB_Berserker, &QPushButton::clicked, this, &Widget::whoAmI);
-    connect(ui->pB_Caster, &QPushButton::clicked, this, &Widget::whoAmI);
+    // 多个信号连接到同一个槽函数
+    connect(ui->ArcherBtn, &QPushButton::clicked, this, &Widget::whoAmI);
+    connect(ui->BerserkerBtn, &QPushButton::clicked, this, &Widget::whoAmI);
+    connect(ui->CasterBtn, &QPushButton::clicked, this, &Widget::whoAmI);
 }
 
 Widget::~Widget()
@@ -35,17 +44,18 @@ void Widget::printText(const QString &text)
 
 void Widget::whoAmI()
 {
-    QString objName = this->sender()->objectName();
-    qDebug() << objName;
+    // 槽函数可以通过sender()获取发送对应信号的对象指针
+    auto obj = this->sender();
+    qDebug() << obj->objectName();
 
     QString strMsg;
-    if (objName == "pB_Archer") {
+    if (obj == ui->ArcherBtn) {
         strMsg = tr("Hello, I am Archer!");
     }
-    else if (objName == "pB_Berserker") {
+    else if (obj == ui->BerserkerBtn) {
         strMsg = tr("Hello, I am Berserker!");
     }
-    else if (objName == "pB_Caster") {
+    else if (obj == ui->CasterBtn) {
         strMsg = tr("Hello, I am Caster!");
     }
     else return;
@@ -54,44 +64,46 @@ void Widget::whoAmI()
     QMessageBox::information(this, tr("Who am I"), strMsg);
 }
 
-void Widget::on_pB_lineEditEnable_clicked()
+void Widget::onLineEditEnableBtnClicked()
 {
     ui->lineEdit->setEnabled(true);
-    ui->pB_lineEditEnable->setEnabled(false);
-    ui->pB_lineEditDisable->setEnabled(true);
+    ui->lineEditEnableBtn->setEnabled(false);
+    ui->lineEditDisableBtn->setEnabled(true);
 }
 
-void Widget::on_pB_lineEditDisable_clicked()
+void Widget::onLineEditDisableBtnClicked()
 {
     ui->lineEdit->setEnabled(false);
-    ui->pB_lineEditEnable->setEnabled(true);
-    ui->pB_lineEditDisable->setEnabled(false);
+    ui->lineEditEnableBtn->setEnabled(true);
+    ui->lineEditDisableBtn->setEnabled(false);
 }
 
-void Widget::on_pB_labelConn_clicked()
+void Widget::onLabelConnectBtnClicked()
 {
+    // 连接信号槽
     connect(ui->lineEdit, &QLineEdit::textEdited, ui->label, &QLabel::setText);
-    ui->pB_labelConn->setEnabled(false);
-    ui->pB_labelDiscon->setEnabled(true);
+    ui->labelConnectBtn->setEnabled(false);
+    ui->labelDisconnectBtn->setEnabled(true);
 }
 
-void Widget::on_pB_labelDiscon_clicked()
+void Widget::onLabelDisconnectBtnClicked()
 {
+    // 断开相应信号槽的连接
     disconnect(ui->lineEdit, &QLineEdit::textEdited, ui->label, &QLabel::setText);
-    ui->pB_labelConn->setEnabled(true);
-    ui->pB_labelDiscon->setEnabled(false);
+    ui->labelConnectBtn->setEnabled(true);
+    ui->labelDisconnectBtn->setEnabled(false);
 }
 
-void Widget::on_pB_textbConn_clicked()
+void Widget::onTextBrsConnectBtnClicked()
 {
     connect(ui->lineEdit, &QLineEdit::textEdited, ui->textBrowser, &QTextBrowser::setText);
-    ui->pB_textbConn->setEnabled(false);
-    ui->pB_textbDiscon->setEnabled(true);
+    ui->textBrsConnectBtn->setEnabled(false);
+    ui->textBrsDisconnectBtn->setEnabled(true);
 }
 
-void Widget::on_pB_textbDiscon_clicked()
+void Widget::onTextBrsDisconnectBtnClicked()
 {
     disconnect(ui->lineEdit, &QLineEdit::textEdited, ui->textBrowser, &QTextBrowser::setText);
-    ui->pB_textbConn->setEnabled(true);
-    ui->pB_textbDiscon->setEnabled(false);
+    ui->textBrsConnectBtn->setEnabled(true);
+    ui->textBrsDisconnectBtn->setEnabled(false);
 }

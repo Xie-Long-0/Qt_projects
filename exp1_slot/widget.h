@@ -12,20 +12,20 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0);
+    explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
 public slots:
     void printText(const QString &text);
-    void whoAmI();
 
 private slots:
-    void on_pB_lineEditEnable_clicked();
-    void on_pB_lineEditDisable_clicked();
-    void on_pB_labelConn_clicked();
-    void on_pB_labelDiscon_clicked();
-    void on_pB_textbConn_clicked();
-    void on_pB_textbDiscon_clicked();
+    void onLineEditEnableBtnClicked();
+    void onLineEditDisableBtnClicked();
+    void onLabelConnectBtnClicked();
+    void onLabelDisconnectBtnClicked();
+    void onTextBrsConnectBtnClicked();
+    void onTextBrsDisconnectBtnClicked();
+    void whoAmI();
 
 private:
     Ui::Widget *ui;
