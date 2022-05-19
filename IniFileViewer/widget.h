@@ -24,22 +24,31 @@ private slots:
     void onCloseFileBtnClick();
     // 弹出选择文件窗口
     void onFileDialogBtnClick();
+    // 查找ini Key
+    void onFindiniKeyBtnClick();
+    // 设置ini Value
+    void onSetiniValueBtnClick();
+    // 删除ini Value
+    void onDeliniValueBtnClick();
     // 删除账号信息
     void onDelEmailBtnClick();
-    // 查找Key
-    void onFindKeyBtnClick();
-    // 设置Value
-    void onSetValueBtnClick();
-    // 删除Value
-    void onDelValueBtnClick();
+    // 查找HashKey
+    void onFindHashKeyBtnClick();
+    // 设置HashValue
+    void onSetHashValueBtnClick();
+    // 删除HashValue
+    void onDelHashValueBtnClick();
     // 弹出菜单
     void onMenuRequest(const QPoint &pos);
     // 复制操作
     void onActionCopyKey();
     void onActionCopyValue();
+    // 编辑ini值
+    void onActionEditIniValue();
+    // 编辑hash值
+    void onActionEditHashValue();
 
-    void showToolWidgets();
-    void hideToolWidgets();
+    void setToolWidgetsEnabled(bool enable);
 
 private:
     Ui::Widget *ui;
