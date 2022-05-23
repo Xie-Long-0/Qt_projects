@@ -1,5 +1,7 @@
-# CheckINIConfigFile Project: 查看INI文件内容工具
+# IniFileViewer Project: INI文件内容查看工具
 
-此工具主要用来查看并修改Qt维护工具的配置文件MaintenanceTool.ini，也可查看其它ini文件。
+此工具原本是用来查看并修改Qt维护程序的配置文件MaintenanceTool.ini，后面也支持查看和修改大多数ini文件。
 
-由于个人需求，添加了删除其中记录的账号信息的功能。
+此工具只支持查看IniFormat格式的ini文件，并且只支持顶级参数值的修改，尽量只修改文本值的参数
+
+当解析文件为MaintenanceTool.ini文件时，可查看其中Variables参数里面的内容，并添加了删除本机上记录的账号信息的功能。
