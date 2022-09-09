@@ -44,7 +44,7 @@ void Widget::onOpenFileBtnClick()
             return;
         }
         file.close();
-        if (fileName.last(4) != ".ini")
+        if (fileName.right(4) != ".ini")
         {
             QMessageBox::critical(this, tr("错误"), tr("只支持打开.ini文件。"));
             return;
