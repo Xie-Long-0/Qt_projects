@@ -1,10 +1,10 @@
-#include "STL_read.h"
+#include "Widget.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    STL_read w;
+    Widget w;
     w.show();
     return a.exec();
 }

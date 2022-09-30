@@ -23,19 +23,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="STL_read.ui">
+    <QtUic Include="Widget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="STL_read.h">
+    <QtMoc Include="Widget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="STL_read.cpp">
+    <ClCompile Include="Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <None Include="STL_read.ico">
+    <None Include="StlFileReader.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <ResourceCompile Include="STL_read.rc">
+    <ResourceCompile Include="StlFileReader.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -46,5 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

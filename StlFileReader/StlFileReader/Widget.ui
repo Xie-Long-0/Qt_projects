@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>STL_readClass</class>
- <widget class="QWidget" name="STL_readClass">
+ <class>WidgetClass</class>
+ <widget class="QWidget" name="WidgetClass">
   <property name="geometry">
    <rect>
     <x>0</x>

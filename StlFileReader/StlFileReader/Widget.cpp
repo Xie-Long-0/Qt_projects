@@ -1,24 +1,26 @@
-#include "STL_read.h"
+#include "Widget.h"
 #include <QDebug>
 #include <QFile>
 #include <QDataStream>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QStandardPaths>
 
-STL_read::STL_read(QWidget *parent)
+Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
-    connect(ui.openBtn, &QPushButton::clicked, this, &STL_read::onOpenBtn);
+    connect(ui.openBtn, &QPushButton::clicked, this, &Widget::onOpenBtn);
 }
 
-STL_read::~STL_read()
+Widget::~Widget()
 {
 }
 
-void STL_read::onOpenBtn()
+void Widget::onOpenBtn()
 {
-    auto file_name = QFileDialog::getOpenFileName(this, tr("打开STL文件"), "E:/", "STL files (*.stl)");
+    auto file_name = QFileDialog::getOpenFileName(this, tr("打开STL文件"), 
+        QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), "STL files (*.stl)");
     if (file_name.isEmpty())
         return;
 
