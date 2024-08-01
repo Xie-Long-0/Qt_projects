@@ -12,11 +12,11 @@ CONFIG += debug_and_release debug_and_release_target build_all
 SOURCES += \
     main.cpp \
     widget.cpp \
-    graphicview.cpp
+    ImageView.cpp
 
 HEADERS += \
     widget.h \
-    graphicview.h
+    ImageView.h
 
 FORMS += \
     widget.ui

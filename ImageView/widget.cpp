@@ -3,7 +3,7 @@
 #include <QFileDialog>
 #include <QBoxLayout>
 
-#include "graphicview.h"
+#include "ImageView.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -13,12 +13,12 @@ Widget::Widget(QWidget *parent)
     setWindowTitle(tr("图片查看器"));
 
     QHBoxLayout *layout = new QHBoxLayout(ui->frame);
-    gv = new GraphicView(ui->frame);
+    gv = new ImageView(ui->frame);
     layout->addWidget(gv);
     layout->setContentsMargins(0, 0, 0, 0);
     ui->frame->setLayout(layout);
 
-    connect(gv, &GraphicView::factorChanged, this, &Widget::onScaleChanged);
+    connect(gv, &ImageView::factorChanged, this, &Widget::onScaleChanged);
 
     ui->zoomInBtn->setEnabled(false);
     ui->zoomOutBtn->setEnabled(false);
@@ -34,7 +34,8 @@ Widget::~Widget()
 
 void Widget::on_openImgBtn_clicked()
 {
-    QString imgName = QFileDialog::getOpenFileName(this, tr("打开图片"), QString(), "*.bmp *.jpg *.jpeg *.png");
+    QString imgName = QFileDialog::getOpenFileName(this, tr("打开图片"), QString(),
+        tr("图片 (*.bmp *.jpg *.jpeg *.png *.tif *.tiff *.webp);; 所有文件 (*.*)"));
     if (imgName.isEmpty()) return;
     QImage img(imgName);
     if (img.isNull()) return;

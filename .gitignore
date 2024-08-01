@@ -291,3 +291,7 @@ paket-files/
 .idea/
 *.sln.iml
 *.qmake.stash
+
+out/
+CMakeUserPresets.json
+CMakePresets.json

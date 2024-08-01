@@ -6,7 +6,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
 
-class GraphicView;
+class ImageView;
 
 class Widget : public QWidget
 {
@@ -28,5 +28,5 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    GraphicView *gv = nullptr;
+    ImageView *gv = nullptr;
 };

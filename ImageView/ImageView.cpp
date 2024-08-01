@@ -1,32 +1,60 @@
-#include "graphicview.h"
+#include "ImageView.h"
 #include <QPainter>
 #include <QTransform>
 #include <QMouseEvent>
 #include <QDebug>
 
-GraphicView::GraphicView(QWidget *parent) : QWidget(parent)
+ImageView::ImageView(QWidget *parent) : QWidget(parent)
 {
 }
 
-void GraphicView::setImage(const QImage &img)
+void ImageView::setImage(const QImage &img)
 {
+    if (m_movie)
+    {
+        m_movie->stop();
+        m_movie->device()->deleteLater();
+        // 防止内部device二次删除
+        m_movie->setDevice(nullptr);
+        m_movie->deleteLater();
+        m_movie = nullptr;
+    }
     m_img = img;
     zoomAuto();
 }
 
-void GraphicView::zoomIn()
+void ImageView::setMovie(QMovie *mov)
+{
+    if (mov == nullptr)
+        return;
+
+    if (m_movie != nullptr)
+        m_movie->deleteLater();
+
+    m_movie = mov;
+    
+    connect(m_movie, &QMovie::frameChanged, this, [=] {
+        m_img = m_movie->currentImage();
+        update();
+        });
+    m_movie->start();
+    m_img = m_movie->currentImage();
+    zoomAuto();
+}
+
+void ImageView::zoomIn()
 {
     QPointF pos(width() / 2.0, height() / 2.0);
     zoomInAtPos(pos);
 }
 
-void GraphicView::zoomOut()
+void ImageView::zoomOut()
 {
     QPointF pos(width() / 2.0, height() / 2.0);
     zoomOutAtPos(pos);
 }
 
-void GraphicView::zoom100()
+void ImageView::zoom100()
 {
     m_factor = 1.0;
     m_w = m_img.width();
@@ -36,21 +64,21 @@ void GraphicView::zoom100()
     emit factorChanged(m_factor);
 }
 
-void GraphicView::zoomAuto()
+void ImageView::zoomAuto()
 {
     adaptFactor();
     centerImage();
     update();
 }
 
-void GraphicView::centerImage()
+void ImageView::centerImage()
 {
     m_x = (width() - m_w) / 2.0;
     m_y = (height() - m_h) / 2.0;
     update();
 }
 
-void GraphicView::mousePressEvent(QMouseEvent *e)
+void ImageView::mousePressEvent(QMouseEvent *e)
 {
     if (!m_img.isNull())
     {
@@ -63,12 +91,12 @@ void GraphicView::mousePressEvent(QMouseEvent *e)
     }
 }
 
-void GraphicView::mouseReleaseEvent(QMouseEvent *)
+void ImageView::mouseReleaseEvent(QMouseEvent *)
 {
     m_pressed = false;
 }
 
-void GraphicView::mouseMoveEvent(QMouseEvent *e)
+void ImageView::mouseMoveEvent(QMouseEvent *e)
 {
     if (m_pressed)
     {
@@ -94,7 +122,7 @@ void GraphicView::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
-void GraphicView::wheelEvent(QWheelEvent *e)
+void ImageView::wheelEvent(QWheelEvent *e)
 {
     if (m_img.isNull()) return;
 
@@ -110,7 +138,7 @@ void GraphicView::wheelEvent(QWheelEvent *e)
     }
 }
 
-void GraphicView::paintEvent(QPaintEvent *e)
+void ImageView::paintEvent(QPaintEvent *e)
 {
     if (m_img.isNull()) return QWidget::paintEvent(e);
 
@@ -130,7 +158,7 @@ void GraphicView::paintEvent(QPaintEvent *e)
     QWidget::paintEvent(e);
 }
 
-void GraphicView::resizeEvent(QResizeEvent *e)
+void ImageView::resizeEvent(QResizeEvent *e)
 {
     if (m_img.isNull()) return QWidget::resizeEvent(e);
 
@@ -142,7 +170,7 @@ void GraphicView::resizeEvent(QResizeEvent *e)
     QWidget::resizeEvent(e);
 }
 
-void GraphicView::zoomInAtPos(const QPointF &pos)
+void ImageView::zoomInAtPos(const QPointF &pos)
 {
     if (m_factor > 0.25 || m_w > width() || m_h > height())
     {
@@ -160,7 +188,7 @@ void GraphicView::zoomInAtPos(const QPointF &pos)
     }
 }
 
-void GraphicView::zoomOutAtPos(const QPointF &pos)
+void ImageView::zoomOutAtPos(const QPointF &pos)
 {
     if (m_factor < 100)
     {
@@ -177,7 +205,7 @@ void GraphicView::zoomOutAtPos(const QPointF &pos)
     }
 }
 
-void GraphicView::adaptFactor()
+void ImageView::adaptFactor()
 {
     double w = (double)width() / m_img.width();
     double h = (double)height() / m_img.height();
@@ -197,7 +225,7 @@ void GraphicView::adaptFactor()
     emit factorChanged(m_factor);
 }
 
-void GraphicView::adjustImage()
+void ImageView::adjustImage()
 {
     // 当图像缩放倍率小于25%，且图像大小小于窗口大小时，图像限制在窗口大小
     if (m_w <= width() && m_h <= height() && m_factor < 0.25)

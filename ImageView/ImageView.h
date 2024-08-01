@@ -2,18 +2,22 @@
 
 #include <QWidget>
 #include <QImage>
+#include <QMovie>
 
-class GraphicView : public QWidget
+class ImageView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GraphicView(QWidget *parent = nullptr);
+    explicit ImageView(QWidget *parent = nullptr);
 
     QImage image() const { return m_img; }
+    // Note: 请勿在外部将该QMovie对象删除
+    QMovie* movie() const { return m_movie; }
     double scaleFactor() const { return m_factor; }
 
 public slots:
     void setImage(const QImage &img);
+    void setMovie(QMovie *mov);
     void zoomIn();      // 缩小
     void zoomOut();     // 放大
     void zoom100();     // 缩放比例100%
@@ -45,6 +49,7 @@ protected:
 
 private:
     QImage m_img;
+    QMovie *m_movie = nullptr;
     QPointF m_pos;
     bool m_pressed = false;
 };
