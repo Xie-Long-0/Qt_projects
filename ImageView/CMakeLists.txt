@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(ImageView VERSION 1.1 LANGUAGES CXX)
+project(ImageView VERSION 1.2 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,6 +18,8 @@ endif()
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+
+qt_standard_project_setup()
 
 # 源文件列表
 set(SOURCES
@@ -38,7 +40,7 @@ set(UIS
 )
 
 # 生成可执行文件
-add_executable(ImageView ${SOURCES} ${HEADERS} ${UIS})
+qt_add_executable(ImageView ${SOURCES} ${HEADERS} ${UIS})
 
 # 链接Qt库
 target_link_libraries(ImageView PUBLIC
