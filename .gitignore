@@ -3,11 +3,8 @@
 *.slo
 *.lo
 *.o
-*.a
 *.la
 *.lai
-*.so
-*.dll
 *.dylib
 
 # Qt-es
@@ -57,7 +54,7 @@ CMakeLists.txt.user*
 x64/
 x86/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
 [Ll]og/
 
@@ -292,6 +289,9 @@ paket-files/
 *.sln.iml
 *.qmake.stash
 
+.qtcreator
 out/
+build/
 CMakeUserPresets.json
 CMakePresets.json
+msvc_make.bat

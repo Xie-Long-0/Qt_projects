@@ -9,6 +9,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += debug_and_release debug_and_release_target build_all
 
+msvc {
+    QMAKE_CXXFLAGS += /utf-8
+}
+
 SOURCES += \
     main.cpp \
     widget.cpp \
