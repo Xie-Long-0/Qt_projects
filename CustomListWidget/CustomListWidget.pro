@@ -4,11 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 6): CONFIG += c++17
 
-TARGET = QListWidget
+TARGET = CustomListWidget
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -22,13 +22,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+msvc {
+    QMAKE_CXXFLAGS += /utf-8
+}
 
 SOURCES += \
+        CustomListItemWidget.cpp \
         main.cpp \
         widget.cpp
 
 HEADERS += \
+        CustomListItemWidget.h \
         widget.h
 
 FORMS += \
+        CustomListItemWidget.ui \
         widget.ui

@@ -289,7 +289,7 @@ paket-files/
 *.sln.iml
 *.qmake.stash
 
-.qtcreator
+.qtcreator/
 out/
 build/
 CMakeUserPresets.json

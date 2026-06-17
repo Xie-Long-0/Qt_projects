@@ -15,6 +15,9 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
+private slots:
+    void onLoad();
+
 private:
     Ui::Widget *ui;
 };
